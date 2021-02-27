@@ -70,7 +70,7 @@ function addTeammate() {
             }
             Employees.push(newEmployee);
             createHTML(newEmployee)
-                .then(function () {
+                .then(function (e) {
                     if (otherMembers === "Sure") {
                         addTeammate();
                     } else {
@@ -106,11 +106,85 @@ function beginHTML() {
     
         <div class="container">
             <div class="row">`;
-            
+    fs.writeFile("dreamteam.html", html, (err) => {
+        err ? console.error(err) : console.log('Success!')
+    })
 }
 
+function createHTML(teammate){
+    return new Promise(function(resolve, reject){
+        const name = teammate.getName();
+        const id = teammate.getId();
+        const email = teammate.getEmail();
+        const role = teammate.getRole();
+    
+        let code = ``;
+    
+        if(role === "Engineer") {
+            const git = teammate.getGithub();
+            code = ` <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${name}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">${role}</h6>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">ID: ${id}</li>
+                        <li class="list-group-item">Email: ${email}</li>
+                        <li class="list-group-item"><a href="https://github.com/${git}" target="_blank">Github Profile</a></li>
+                      </ul>
+                </div>
+            </div>
+        </div>`
+        }else if(role === "Intern") {
+            const school = teammate.getSchool();
+            code = ` <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${name}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">${role}</h6>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">ID: ${id}</li>
+                        <li class="list-group-item">Email: ${email}</li>
+                        <li class="list-group-item">School: ${school}</li>
+                      </ul>
+                </div>
+            </div>
+        </div>`
+        }else{
+            const phone = teammate.getNumber()
+            code = `<div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${name}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">${role}</h6>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">ID: ${id}</li>
+                        <li class="list-group-item">Email: ${email}</li>
+                        <li class="list-group-item">Phone: ${phone}</li>
+                      </ul>
+                </div>
+            </div>
+        </div>`
+        }
+        fs.appendFile("dreamteam.html", code, (err) => {
+            if(err) {
+                return reject(err);
+            }
+            return resolve();
+        });
+    })
+};
 
+function endHTML() {
+    const html =`  </div>
+    </div>
+</body>
 
+</html>`
+fs.appendFile("dreamteam.html", html, (err) => {
+    err ? console.error(err) : console.log('Sucess!')
+})
+};
 
 
 
