@@ -24,7 +24,7 @@ Once invoked, the command line will the user ask a series of questions that will
 
 ## Preview
 
-![README Example](assets/gif/READ-ME.gif)
+![Generator Example](README-items/Generator.gif)
 
 
 
@@ -40,10 +40,13 @@ Frameworks: Bootstrap
 
 ## Links
 Repo: https://github.com/uzobeki/Team-Profile-Generator <br>
-Example Page: https://github.com/uzobeki/Good-README/blob/main/assets/New-README.md
+Example Page: https://github.com/uzobeki/Team-Profile-Generator/blob/main/dreamteam.html
 
 ## Tests
 
+Several tests were done to ensure the efficiency of the javascript files. 4 test files were created to test the code of the 4 Javascript files needed for this assignment. These files are located within the _tests_ folder. The results of that testing is below.
+
+![Tests](README-items/TestScreenshot.png)
 
 
 
